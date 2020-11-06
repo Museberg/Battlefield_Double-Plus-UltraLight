@@ -1,0 +1,99 @@
+<html>
+<head>
+    <title>Chat WebSocket</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"> </script>
+</head>
+
+<body onload="disconnect()">
+
+<div>
+    <div>
+        <button id="connect">Connect</button>
+        <button id="disconnect" disabled="disabled">Disconnect</button>
+    </div>
+    <br />
+    <div>Username:
+        <input type="text" id="from" value="Anna"/>
+    </div>
+
+    <div>
+        <button id="register">Register user</button>
+    </div>
+    <div>
+        <button id="subscribe">Subscribe</button>
+    </div>
+    <br />
+    <div id="greetings"></div>
+    <div id="conversationDiv">
+        <input type="text" id="text" value="Hi there"/>
+        <button id="sendMessage">Send</button>
+        <p id="response"></p>
+    </div>
+</div>
+
+<div id="battlefield">
+    <button id="spawn-player" onclick="spawnPlayer()">Random spawn</button>
+    <table class="table table-bordered fixed-table">
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+    for(let i = 0; i < 10; i++){
+        $('#battlefield table tbody').append('<tr id=' + i + '></tr>')
+        for(let j = 0; j < 10; j++){
+            $('#battlefield table tbody #' + i).append('<td id=' + i + j +'>' + i + j + '<p></p></td>')
+        }
+    }
+
+    window.addEventListener("keydown", function (event) {
+        if (event.defaultPrevented) {
+            return; // Do nothing if the event was already processed
+        }
+
+        switch (event.key) {
+            case "Down": // IE/Edge specific value
+            case "ArrowDown":
+                movePlayer("down")
+                break;
+            case "Up": // IE/Edge specific value
+            case "ArrowUp":
+                movePlayer("up")
+                break;
+            case "Left": // IE/Edge specific value
+            case "ArrowLeft":
+                movePlayer("left")
+                break;
+            case "Right": // IE/Edge specific value
+            case "ArrowRight":
+                movePlayer("right")
+                break;
+            default:
+                return; // Quit when this doesn't handle the key event.
+        }
+        // Cancel the default action to avoid it being handled twice
+        event.preventDefault();
+    }, true);
+</script>
+
+</body>
+
+<style>
+    table tbody tr td {
+        color: gray;
+    }
+    .fixed-table{
+        table-layout: fixed;
+    }
+    .player-present{
+        background-color: red;
+    }
+</style>
+
+</html>
