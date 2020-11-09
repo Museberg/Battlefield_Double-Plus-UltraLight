@@ -17,7 +17,7 @@
     </div>
     <br />
     <div>Username:
-        <input type="text" id="from" value="Anna"/>
+        <input type="text" id="from" value="Maus"/>
     </div>
 
     <div>
@@ -39,7 +39,6 @@
     <button id="spawn-player" onclick="spawnPlayer()">Random spawn</button>
     <table class="table table-bordered fixed-table">
         <tbody>
-
         </tbody>
     </table>
 </div>
@@ -74,6 +73,19 @@
             case "ArrowRight":
                 movePlayer("right")
                 break;
+            case "d":
+                shoot("right");
+                break;
+            case "s":
+                shoot("down");
+                break;
+            case "a":
+                console.log("SHOOTING LEFT!")
+                shoot("left");
+                break;
+            case "w":
+                shoot("up");
+                break;
             default:
                 return; // Quit when this doesn't handle the key event.
         }
@@ -94,6 +106,17 @@
     .player-present{
         background-color: red;
     }
+    .bullet{
+        background-color: green;
+    }
+    .dot {
+        height: 25px;
+        width: 25px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
 </style>
 
 </html>
